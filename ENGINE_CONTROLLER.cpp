@@ -6,13 +6,13 @@
 #include "bitMacros.h"
 
 
-int TR[7]; //ÐŸÐ°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ñ‹ Ð³Ð¸Ñ€Ð¾ÑÐºÐ¾Ð¿Ð°
+int TR[7]; //Ïàðàìåòðû ãèðîñêîïà
 
-int8_t	FW_BK = 1; //Ð¤Ð»Ð°Ð³ Ð¿Ñ€ÑÐ¼Ð¾Ð³Ð¾ Ð¸Ð»Ð¸ Ð¾Ð±Ñ€Ð°Ñ‚Ð½Ð¾Ð³Ð¾ ÑÑ‡ÐµÑ‚Ð° 1 - Ð¿Ñ€ÑÐ¼Ð¾Ð¹ 0 - Ð¾Ð±Ñ€Ð°Ñ‚Ð½Ñ‹Ð¹
+int8_t	FW_BK = 1; //Ôëàã ïðÿìîãî èëè îáðàòíîãî ñ÷åòà 1 - ïðÿìîé 0 - îáðàòíûé
 
-#define ENGINE_FR  20 //Ð§Ð°ÑÑ‚Ð¾Ñ‚Ð° Ð¸Ð¼Ð¿ÑƒÐ»ÑŒÑÐ¾Ð² Ð² Ð“Ñ†
+#define ENGINE_FR  20 //×àñòîòà èìïóëüñîâ â Ãö
 #define LEN_reg 8
-#define Ndel 1   //ÐšÐ¾ÑÑ„Ñ„Ð¸Ñ†ÐµÐ½Ñ‚ Ð´ÐµÐ»ÐµÐ½Ð¸Ñ
+#define Ndel 1   //Êîýôôèöåíò äåëåíèÿ
 #define OCRReg  F_CPU/(Ndel*pow(2,(LEN_reg+2))*ENGINE_FR)-1
 
 ENGINE_CONTROLLER_8::ENGINE_CONTROLLER_8(uint8_t Num)
@@ -99,13 +99,13 @@ void ENGINE_CONTROLLER_8::AUTO_block()
 					{
 						reg_er[i]=EnginePos[i]-EnginePosSet[i];
 					}
-					// Ð»Ð¾Ð³Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ-Ñ€ÐµÐ»ÐµÐ¹Ð½Ð¾Ðµ Ñ€ÐµÐ³ÑƒÐ»Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ
+					// ëîãè÷åñêîå-ðåëåéíîå ðåãóëèðîâàíèå
 					/*
 					if (reg_er[i]==0) {CLR_BIT(StartFwAuto,i); CLR_BIT(StartBwAuto,i);}
 					if (reg_er[i]>0)  {SET_BIT(StartFwAuto,i); CLR_BIT(StartBwAuto,i);}
 					if (reg_er[i]<0)  {SET_BIT(StartBwAuto,i); CLR_BIT(StartFwAuto,i);}
 					*/
-					//PID Ñ„ÑƒÐ½ÐºÑ†Ð¸Ñ
+					//PID ôóíêöèÿ
 					OutPIDLev[i] = Kcoef[i]*reg_er[i];
 
 				
